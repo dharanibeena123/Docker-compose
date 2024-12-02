@@ -1,33 +1,31 @@
-version: '3.8'
-
 services:
   app:
-    image: docker-compose-app  # Use the image you just built
-    container_name: docker-compose-db-1
+    build: .  # Build the image from the current directory (assuming Dockerfile is in the same directory as docker-compose.yml)
+    container_name: docker-compose-app-1  # Changed for clarity
     ports:
       - "7072:7071"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod  # Example of environment variables
-      - DB_HOST=db  # Database host name (service name)
-      - DB_PORT=3306  # MySQL port
-      - DB_NAME=docker  # Your DB name
-      - DB_USER=root  # DB user
-      - DB_PASSWORD=Root@123  # DB password
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=docker
+      - DB_USER=root
+      - DB_PASSWORD=Root@123
     depends_on:
-      - db  # Make sure the app starts after the DB service is ready
+      - db
     networks:
       - app-network
 
   db:
-    image: mysql:8.0  # MySQL Docker image
+    image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: Root@123  # Root password for MySQL
-      MYSQL_DATABASE: docker  # The database name to create
-      MYSQL_USER: root  # The username for the DB
-      MYSQL_PASSWORD: Root@123  # Password for the DB user
+      MYSQL_ROOT_PASSWORD: Root@123
+      MYSQL_DATABASE: docker
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Root@123
     ports:
-      - "3307:3306"  # Expose the DB port for external access (if needed)
+      - "3307:3306"
 
 networks:
   app-network:
-    driver: bridge  # Default network type
+    driver: bridge
