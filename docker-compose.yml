@@ -6,7 +6,7 @@ services:
       context: .  # Path to the directory containing the Dockerfile
       dockerfile: dockerfile
     ports:
-      - "7072:7071"
+      - "7073:7071"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/docker
     depends_on:
