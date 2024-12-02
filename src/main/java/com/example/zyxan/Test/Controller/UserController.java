@@ -19,7 +19,7 @@ public class UserController {
         return "Hello, Welcome to the Docker!";
     }
 
-    @GetMapping
+    @GetMapping("getAll")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -29,7 +29,7 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping
+    @PostMapping("createUser")
     public User createUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
