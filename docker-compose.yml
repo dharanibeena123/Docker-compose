@@ -1,7 +1,9 @@
+version: '3.8'
+
 services:
   app:
     build: .  # Build the image from the current directory (assuming Dockerfile is in the same directory as docker-compose.yml)
-    container_name: docker-compose-app-1  # Changed for clarity
+    container_name: docker-compose-app-1
     ports:
       - "7072:7071"
     environment:
@@ -19,12 +21,12 @@ services:
   db:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: Root@123
-      MYSQL_DATABASE: docker
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Root@123
+      MYSQL_ROOT_PASSWORD: Root@123  # Set root password
+      MYSQL_DATABASE: docker  # Default database to create
     ports:
-      - "3307:3306"
+      - "3307:3306"  # Expose DB port to the host
+    networks:
+      - app-network
 
 networks:
   app-network:
